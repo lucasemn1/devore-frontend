@@ -1,4 +1,3 @@
-import VideoFrame from 'assets/Frame17.png';
 import React, { useEffect, useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
@@ -54,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: 'rgba(5, 5, 5, 0.5)',
     borderRadius: 10,
-    marginBottom: 20,
+    marginTop: 20,
     borderSize: 2,
     borderStyle: 'solid',
     borderColor: '#050505'
@@ -77,13 +76,19 @@ const useStyles = makeStyles((theme) => ({
   imageCard: {
     height: 225,
   },
+  textCard: {
+    fontSize: 14,
+    color: '#ffffff',
+    margin: 20,
+  },
 }));
 
 function Home() {
   const classes = useStyles();
   const [photos, setPhotos] = useState([]);
   const [videos, setVideos] = useState([]);
-
+  const [comments, setComments] = useState([]);
+  
   useEffect(() => {
     api.get('/photos', { headers: { 'access_id': '0123654' } })
       .then(response => {
@@ -95,6 +100,10 @@ function Home() {
         setVideos(response.data);
       });
 
+    api.get('/comments', { headers: { 'access_id': '0123654' } })
+      .then(response => {
+        setComments(response.data);
+      });
   }, []);
 
   function handleToBook() {
@@ -135,7 +144,7 @@ function Home() {
                     {video.bookname}
                   </div>
                   <div style={{ backgroundColor: '#4E4E4E' }}>
-                    <iframe width="274" height="272" src="https://www.youtube.com/embed/NuYeD5ziJVU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="274" height="272" src={video.filename} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                   </div>
                   <div
                     className={classes.cardBottom}
@@ -203,74 +212,32 @@ function Home() {
             className={classes.text}
           >
             <ShortTextIcon className={classes.textColorPrimary} />
-            <Paper className={classes.paper}>
-              <div
-                className={classes.textColorPrimary}
-                style={{ paddingTop: 10, paddingBottom: 10 }}
-              >
-                Superman - Entre a Foice e o Martelo
-              </div>
-              <div
-                style={{ height: '250px' }}
-                className={classes.textColorWhite}
-              >
-                Superman - Entre a foice e o martelo ou na original Superman -
-                Red Son é uma obra onde vemos o Superman, o Homem de Aço, porém
-                de uma maneira bem diferente da que já conhecemos. A história se
-                inicia durante a Segunda Guerra Mundial, porém em uma realidade
-                onde a nave do Kriptoniano, o Clark, demorou 12 horas a mais
-                para cair na terra, então assim ao invés de cair nos EUA, acabou
-                caindo na Rússia e o Clark viveu e cresceu sobre os costumes e
-                culturas da população lá daquela época. ...
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  paddingRight: 20,
-                  paddingLeft: 20,
-                }}
-              >
-                <div className={classes.textColorWhite}>@lucasemn</div>
-                <div className={classes.textColorWhite}>
-                  204 <FavoriteBorderIcon />
-                </div>
-              </div>
-            </Paper>
-            <Paper className={classes.paper}>
-              <div
-                className={classes.textColorPrimary}
-                style={{ paddingTop: 10, paddingBottom: 10 }}
-              >
-                Superman - Entre a Foice e o Martelo
-              </div>
-              <div
-                style={{ height: '250px' }}
-                className={classes.textColorWhite}
-              >
-                Superman - Entre a foice e o martelo ou na original Superman -
-                Red Son é uma obra onde vemos o Superman, o Homem de Aço, porém
-                de uma maneira bem diferente da que já conhecemos. A história se
-                inicia durante a Segunda Guerra Mundial, porém em uma realidade
-                onde a nave do Kriptoniano, o Clark, demorou 12 horas a mais
-                para cair na terra, então assim ao invés de cair nos EUA, acabou
-                caindo na Rússia e o Clark viveu e cresceu sobre os costumes e
-                culturas da população lá daquela época. ...
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  paddingRight: 20,
-                  paddingLeft: 20,
-                }}
-              >
-                <div className={classes.textColorWhite}>@lucasemn</div>
-                <div className={classes.textColorWhite}>
-                  204 <FavoriteBorderIcon />
-                </div>
-              </div>
-            </Paper>
+
+            {comments.map(comment => {
+              return (
+                <Paper className={classes.card}>
+                  <div className={classes.cardTitle}>
+                    {comment.bookname}
+                  </div>
+                  <div className={classes.textCard}>
+                    {comment.text}
+                  </div>
+                  <div
+                    className={classes.cardBottom}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <div className={classes.textColorWhite}>{comment.username}</div>
+                    <div className={classes.textColorWhite}>
+                      {comment.likes} <FavoriteBorderIcon />
+                    </div>
+                  </div>
+                </Paper>
+              );
+            })}
+
           </Grid>
         </Grid>
       </div>

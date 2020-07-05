@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   container: {
-    paddingTop: 60,
+    paddingTop: 80,
   },
 }));
 
