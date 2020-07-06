@@ -3,7 +3,6 @@ import TrofeuBronze from 'assets/trofeuBronze.png';
 import TrofeuOuro from 'assets/trofeuOuro.png';
 import TrofeuPrata from 'assets/trofeuPrata.png';
 import React, { useEffect, useState } from 'react';
-
 import { Box, Container, ButtonGroup, Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -109,13 +108,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Ranking() {
+function RankingClasses() {
   const classes = useStyles();
   const access_id = localStorage.getItem('accessId') || '0123654';
   const [ranking, setRanking] = useState([{}, {}, {}]);
 
   useEffect(() => {
-    api.get('rankingDaEscola', {headers: {access_id}})
+    api.get('rankingDaEscola', { headers: { access_id } })
       .then(response => {
         console.log(response.data);
         setRanking(response.data);
@@ -279,4 +278,4 @@ function Ranking() {
   );
 }
 
-export default Ranking;
+export default RankingClasses;

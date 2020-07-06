@@ -1,7 +1,7 @@
 import Cinema from 'assets/cinema.png';
-import TrofeuBronze from 'assets/trofeuBronze.png';
-import TrofeuOuro from 'assets/trofeuOuro.png';
-import TrofeuPrata from 'assets/trofeuPrata.png';
+import TrofeuBronze from 'assets/avatarBronze.png';
+import TrofeuOuro from 'assets/avatarOuro.png';
+import TrofeuPrata from 'assets/avatarPrata.png';
 import React, { useEffect, useState } from 'react';
 
 import { Box, Container, ButtonGroup, Button } from '@material-ui/core';
@@ -109,13 +109,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Ranking() {
+function RankingTops() {
   const classes = useStyles();
   const access_id = localStorage.getItem('accessId') || '0123654';
   const [ranking, setRanking] = useState([{}, {}, {}]);
 
   useEffect(() => {
-    api.get('rankingDaEscola', {headers: {access_id}})
+    api.get('rankingDaTurma', {headers: {access_id}})
       .then(response => {
         console.log(response.data);
         setRanking(response.data);
@@ -155,16 +155,16 @@ function Ranking() {
                   aria-label="vertical outlined primary button group"
                   className={classes.lista}
                 >
-                  <Button variant="contained">
+                  <Button>
                     <ListIcon />
                     <span>Turmas</span>
                   </Button>
-                  <Button>
+                  <Button variant="contained">
                     <SupervisedUserCircleIcon />
                     <span style={{ paddingLeft: 10 }}>Sua turma</span>
                   </Button>
                   <Button>
-                    <SupervisedUserCircleIcon />
+                    <SupervisedUserCircleIcon/>
                     <span style={{ paddingLeft: 10 }}>Top 3 da escola</span>
                   </Button>
                 </ButtonGroup>
@@ -218,7 +218,7 @@ function Ranking() {
                     {ranking[0].name}
                   </div>
                   <div>
-                    <span style={{ color: '#FFF' }}>{ranking[0].totalPoints}</span>{' '}
+                    <span style={{ color: '#FFF' }}>{ranking[0].points}</span>{' '}
                     <span style={{ color: '#6FBF8B' }}>pontos</span>
                   </div>
                 </Paper>
@@ -242,7 +242,7 @@ function Ranking() {
                     {ranking[1].name}
                   </div>
                   <div>
-                    <span style={{ color: '#FFF' }}>{ranking[1].totalPoints}</span>{' '}
+                    <span style={{ color: '#FFF' }}>{ranking[1].points}</span>{' '}
                     <span style={{ color: '#6FBF8B' }}>pontos</span>
                   </div>
                 </Paper>
@@ -266,7 +266,7 @@ function Ranking() {
                     {ranking[2].name}
                   </div>
                   <div>
-                    <span style={{ color: '#FFF' }}>{ranking[2].totalPoints}</span>{' '}
+                    <span style={{ color: '#FFF' }}>{ranking[2].points}</span>{' '}
                     <span style={{ color: '#6FBF8B' }}>pontos</span>
                   </div>
                 </Paper>
@@ -279,4 +279,4 @@ function Ranking() {
   );
 }
 
-export default Ranking;
+export default RankingTops;

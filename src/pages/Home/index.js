@@ -11,6 +11,7 @@ import ShortTextIcon from '@material-ui/icons/ShortText';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import api from '../../services/api';
 import { Link, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -65,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 40,
     paddingBottom: 20,
     fontSize: 20,
+    cursor: 'pointer',
   },
   cardBottom: {
     paddingTop: 20,
@@ -88,6 +90,7 @@ function Home() {
   const [photos, setPhotos] = useState([]);
   const [videos, setVideos] = useState([]);
   const [comments, setComments] = useState([]);
+  const history = useHistory();
   
   useEffect(() => {
     api.get('/photos', { headers: { 'access_id': '0123654' } })
@@ -106,8 +109,8 @@ function Home() {
       });
   }, []);
 
-  function handleToBook() {
-
+  function handleToBook(bookId) {
+    history.push('/book', {bookId});
   }
 
   return (
@@ -140,7 +143,7 @@ function Home() {
             {videos.map(video => {
               return (
                 <Paper className={classes.card}>
-                  <div className={classes.cardTitle} >
+                  <div className={classes.cardTitle} onClick={() => handleToBook(video.bookId)}>
                     {video.bookname}
                   </div>
                   <div style={{ backgroundColor: '#4E4E4E' }}>
@@ -178,7 +181,7 @@ function Home() {
             {photos.map(photo => {
               return (
                 <Paper className={classes.card}>
-                  <div className={classes.cardTitle} >
+                <div className={classes.cardTitle} onClick={() => handleToBook(photo.bookId)}>
                     {photo.bookname}
                   </div>
                   <div style={{ backgroundColor: '#4E4E4E', height: '225px' }}>
@@ -216,7 +219,7 @@ function Home() {
             {comments.map(comment => {
               return (
                 <Paper className={classes.card}>
-                  <div className={classes.cardTitle}>
+                <div className={classes.cardTitle} onClick={() => handleToBook(comment.bookId)}>
                     {comment.bookname}
                   </div>
                   <div className={classes.textCard}>

@@ -90,9 +90,9 @@ function Content() {
           icon={<SearchIcon />}
         />
         <BottomNavigationAction
-          label="Perfil"
+          label="Ranking"
           className={classes.bottomIcon}
-          icon={<PersonIcon />}
+          icon={<SearchIcon />}
         />
       </BottomNavigation>
     </div>
