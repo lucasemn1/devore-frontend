@@ -1,1 +1,2 @@
-Este projeto contém um código inicial para o desenvolvimento com React, redux e saga
+O distanciamento entre as empresas que oferecem serviços de curadoria literária e a população brasileira tem inibido a aproximação de novos leitores. O projeto, Devore, é composto por um Progressive Web App (PWA) que torna possível a gamificação do compartilhamento de resenhas de livros em áudio, texto ou vídeo, entre os alunos de ensino fundamental e médio.
+Com o objetivo de alcançar o maior número possível de dispositivos, nós utilizamos um design responsivo baseado no material design da Google. Nós usamos o framework, Reactjs, com a biblioteca material UI
