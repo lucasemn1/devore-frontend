@@ -4,7 +4,7 @@ import TrofeuOuro from 'assets/trofeuOuro.png';
 import TrofeuPrata from 'assets/trofeuPrata.png';
 import React from 'react';
 
-import { Box } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,11 +39,13 @@ const useStyles = makeStyles((theme) => ({
   },
   menu: {
     display: 'flex',
+    width: '100%',
     [theme.breakpoints.down('md')]: {
       display: 'none',
     },
   },
   lista: {
+    width: '100%',
     listStyleType: 'none',
     borderWidth: 1,
     borderStyle: 'solid',
@@ -73,6 +75,11 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     justifyContent: 'center',
   },
+  gift: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',    
+  }
 }));
 
 function Ranking() {
@@ -94,9 +101,9 @@ function Ranking() {
       </Tabs>
       <div className={classes.box}>
         <Grid container spacing={3}>
-          <Grid item md={4} lg={4} sm={12} xs={12}>
-            <Grid container>
-              <Grid
+          <Grid item md={4} lg={4} sm={12} xs={12} >
+            <Container className={classes.gift}>
+              <Box
                 item
                 md={12}
                 lg={12}
@@ -136,8 +143,8 @@ function Ranking() {
                     <span style={{ paddingLeft: 10 }}>Estatísticas</span>
                   </li>
                 </ul>
-              </Grid>
-              <Grid
+              </Box>
+              <Box
                 item
                 md={12}
                 lg={12}
@@ -162,8 +169,8 @@ function Ranking() {
                     </div>
                   </div>
                 </Paper>
-              </Grid>
-            </Grid>
+              </Box>
+            </Container>
           </Grid>
           <Grid item md={8} lg={8} sm={12} xs={12}>
             <Grid container spacing={1}>
