@@ -5,12 +5,13 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 const Routes = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/login" exact component={Signin} />
-        <Route path="/" exact component={Content} />
-      </Switch>
-    </BrowserRouter>
+    <Content />
+    // <BrowserRouter>
+    //   <Switch>
+    //     <Route path="/login" exact component={Signin} />
+    //     <Route path="/" exact component={Content} />
+    //   </Switch>
+    // </BrowserRouter>
   );
 };
 
