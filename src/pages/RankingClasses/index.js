@@ -2,9 +2,9 @@ import Cinema from 'assets/cinema.png';
 import TrofeuBronze from 'assets/trofeuBronze.png';
 import TrofeuOuro from 'assets/trofeuOuro.png';
 import TrofeuPrata from 'assets/trofeuPrata.png';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Box, Container } from '@material-ui/core';
+import { Box, Container, ButtonGroup, Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,6 +14,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ListIcon from '@material-ui/icons/List';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import TimelineIcon from '@material-ui/icons/Timeline';
+import api from 'services/api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -110,6 +111,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Ranking() {
   const classes = useStyles();
+  const access_id = localStorage.getItem('accessId') || '0123654';
+  const [ranking, setRanking] = useState([{}, {}, {}]);
+
+  useEffect(() => {
+    api.get('rankingDaEscola', {headers: {access_id}})
+      .then(response => {
+        console.log(response.data);
+        setRanking(response.data);
+      });
+  }, []);
+
   return (
     <>
       <Tabs
@@ -137,38 +149,25 @@ function Ranking() {
                 xs={12}
                 className={classes.menu}
               >
-                <ul className={classes.lista}>
-                  <li className={classes.listaCabecalho}>
+                <ButtonGroup
+                  orientation="vertical"
+                  color="primary"
+                  aria-label="vertical outlined primary button group"
+                  className={classes.lista}
+                >
+                  <Button variant="contained">
                     <ListIcon />
                     <span>Turmas</span>
-                  </li>
-                  <li className={classes.listaItem}>
+                  </Button>
+                  <Button>
                     <SupervisedUserCircleIcon />
                     <span style={{ paddingLeft: 10 }}>Sua turma</span>
-                  </li>
-                  <li
-                    className={classes.listaItem}
-                    style={{
-                      borderColor: '#6FBF8B',
-                      borderWidth: 1,
-                      borderTopStyle: 'solid',
-                      borderBottomStyle: 'solid',
-                    }}
-                  >
-                    <CheckCircleIcon />
-                    <span
-                      style={{
-                        paddingLeft: 10,
-                      }}
-                    >
-                      Tops leitores da escola
-                    </span>
-                  </li>
-                  <li className={classes.listaItem}>
-                    <TimelineIcon />
-                    <span style={{ paddingLeft: 10 }}>Estatísticas</span>
-                  </li>
-                </ul>
+                  </Button>
+                  <Button>
+                    <SupervisedUserCircleIcon />
+                    <span style={{ paddingLeft: 10 }}>Top 3 da escola</span>
+                  </Button>
+                </ButtonGroup>
               </Box>
               <Box
                 item
@@ -216,10 +215,10 @@ function Ranking() {
                     <b className={classes.title}>CAMPEÃO</b>
                   </div>
                   <div style={{ textTransform: 'uppercase', color: '#FFF' }}>
-                    8º ANO A
+                    {ranking[0].name}
                   </div>
                   <div>
-                    <span style={{ color: '#FFF' }}>3654025</span>{' '}
+                    <span style={{ color: '#FFF' }}>{ranking[0].totalPoints}</span>{' '}
                     <span style={{ color: '#6FBF8B' }}>pontos</span>
                   </div>
                 </Paper>
@@ -240,10 +239,10 @@ function Ranking() {
                     <b className={classes.title}>VICE-CAMPEÃO</b>
                   </div>
                   <div style={{ textTransform: 'uppercase', color: '#FFF' }}>
-                    6º ANO A
+                    {ranking[1].name}
                   </div>
                   <div>
-                    <span style={{ color: '#FFF' }}>365454</span>{' '}
+                    <span style={{ color: '#FFF' }}>{ranking[1].totalPoints}</span>{' '}
                     <span style={{ color: '#6FBF8B' }}>pontos</span>
                   </div>
                 </Paper>
@@ -264,40 +263,10 @@ function Ranking() {
                     <b className={classes.title}>TERCEIRO LUGAR</b>
                   </div>
                   <div style={{ textTransform: 'uppercase', color: '#FFF' }}>
-                    9º ANO A
+                    {ranking[2].name}
                   </div>
                   <div>
-                    <span style={{ color: '#FFF' }}>95758</span>{' '}
-                    <span style={{ color: '#6FBF8B' }}>pontos</span>
-                  </div>
-                </Paper>
-              </Grid>
-              <Grid item md={6} lg={6} sm={12} xs={12}>
-                <Paper
-                  className={classes.paper}
-                  style={{
-                    height: 230,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: 26,
-                      textTransform: 'uppercase',
-                      color: '#6FBF8B',
-                      paddingBottom: 20,
-                    }}
-                  >
-                    <b>4º lugar</b>
-                  </div>
-                  <div style={{ textTransform: 'uppercase', color: '#FFF' }}>
-                    4º ANO A
-                  </div>
-                  <div>
-                    <span style={{ color: '#FFF' }}>78525</span>{' '}
+                    <span style={{ color: '#FFF' }}>{ranking[2].totalPoints}</span>{' '}
                     <span style={{ color: '#6FBF8B' }}>pontos</span>
                   </div>
                 </Paper>
