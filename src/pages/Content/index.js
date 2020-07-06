@@ -15,6 +15,7 @@ import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
 import SearchIcon from '@material-ui/icons/Search';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   bottomBar: {
@@ -49,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Content() {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div className={classes.content}>
@@ -58,7 +60,7 @@ function Content() {
             <img src={Logo} alt="Logo Devore" />
           </div>
 
-          <Button color="inherit" onClick={() => alert('Logout')}>
+          <Button color="inherit" onClick={() => history.push('/sair')}>
             Logout
           </Button>
         </Toolbar>
@@ -90,6 +92,7 @@ function Content() {
           icon={<SearchIcon />}
         />
         <BottomNavigationAction
+          onClick={() => { history.push('/rankingDaEscola') }}
           label="Ranking"
           className={classes.bottomIcon}
           icon={<SearchIcon />}

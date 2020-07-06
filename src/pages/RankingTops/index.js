@@ -15,6 +15,7 @@ import ListIcon from '@material-ui/icons/List';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import api from 'services/api';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -113,6 +114,7 @@ function RankingTops() {
   const classes = useStyles();
   const access_id = localStorage.getItem('accessId') || '0123654';
   const [ranking, setRanking] = useState([{}, {}, {}]);
+  const history = useHistory();
 
   useEffect(() => {
     api.get('rankingTopsDaEscola', {headers: {access_id}})
@@ -155,12 +157,11 @@ function RankingTops() {
                   aria-label="vertical outlined primary button group"
                   className={classes.lista}
                 >
-                  <Button>
+                  <Button onClick={ () => {history.push('/rankingDaEscola')}}>
                     <ListIcon />
                     <span>Turmas</span>
                   </Button>
-                  <Button>
-                    <SupervisedUserCircleIcon />
+                  <Button onClick={ () => {history.push('/rankingDaTurma')}}>
                     <span style={{ paddingLeft: 10 }}>Sua turma</span>
                   </Button>
                   <Button variant="contained">

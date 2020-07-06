@@ -1,5 +1,5 @@
 import Phone from 'assets/Phone.png';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { TextField } from '@material-ui/core';
@@ -31,12 +31,6 @@ const styles = () => ({
 function Signin() {
   const classes = useStyles();
 
-  function handleLogin(event) {
-    
-  }
-
-
-
   const [values, setValues] = React.useState({
     idAcesso: '',
     password: '',
@@ -46,7 +40,7 @@ function Signin() {
 
   async function submit() {
     localStorage.setItem('acess_id', '0123654');
-    history.push('/');
+    history.push('/home');
   }
   return (
     <Grid container style={{ height: '100%' }}>
