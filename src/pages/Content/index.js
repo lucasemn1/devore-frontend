@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     paddingTop: 80,
+    paddingBottom: 60,
   },
 }));
 

@@ -19,8 +19,11 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: 2,
     textAlign: 'center',
-    backgroundColor: '#050505',
-    marginBottom: 20,
+    backgroundColor: 'rgba(5, 5, 5, 0.6)',
+    margin: 5,
+  },
+  title: {
+    fontSize: 22,
   },
   textColorPrimary: {
     color: '#6FBF8B',
@@ -78,8 +81,31 @@ const useStyles = makeStyles((theme) => ({
   gift: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',    
-  }
+    alignItems: 'center',
+  },
+  card: {
+    backgroundColor: 'rgba(5, 5, 5, 0.5)',
+    borderRadius: 10,
+    marginTop: 20,
+    borderSize: 2,
+    borderStyle: 'solid',
+    borderColor: '#050505',
+  },
+  cardBottom: {
+    paddingTop: 20,
+    paddingLeft: 40,
+    paddingRight: 40,
+    paddingBottom: 20,
+    color: '#FFFFFF',
+  },
+  imageCard: {
+    height: 225,
+  },
+  textCard: {
+    fontSize: 14,
+    color: '#ffffff',
+    margin: 20,
+  },
 }));
 
 function Ranking() {
@@ -152,20 +178,20 @@ function Ranking() {
                 xs={12}
                 style={{ display: 'flex' }}
               >
-                <Paper className={classes.paper}>
-                  <img src={Cinema} alt="" style={{ width: '100%' }} />
+                <Paper className={classes.card}>
+                  <img src={Cinema} className={classes.imageCard} style={{ width: '100%' }} />
                   <div>
-                    <div style={{ color: '#6FBF8B' }}>
+                    <div className={classes.cardBottom}>
                       Prêmio: 1 ingresso para o cinema por aluno.
-                    </div>
-                    <div
-                      style={{
-                        color: '#F28A2E',
-                        marginTop: 5,
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      Resultado em: 24/07/2020
+                      <div
+                        style={{
+                          color: '#F28A2E',
+                          marginTop: 5,
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        Resultado em: 24/07/2020
+                      </div>
                     </div>
                   </div>
                 </Paper>
@@ -187,7 +213,7 @@ function Ranking() {
                 >
                   <img src={TrofeuOuro} alt="" />
                   <div style={{ textTransform: 'uppercase', color: '#6FBF8B' }}>
-                    Campeão
+                    <b className={classes.title}>CAMPEÃO</b>
                   </div>
                   <div style={{ textTransform: 'uppercase', color: '#FFF' }}>
                     8º ANO A
@@ -211,7 +237,7 @@ function Ranking() {
                 >
                   <img src={TrofeuPrata} alt="" />
                   <div style={{ textTransform: 'uppercase', color: '#6FBF8B' }}>
-                    VICE-CAMPEÃO
+                    <b className={classes.title}>VICE-CAMPEÃO</b>
                   </div>
                   <div style={{ textTransform: 'uppercase', color: '#FFF' }}>
                     6º ANO A
@@ -235,7 +261,7 @@ function Ranking() {
                 >
                   <img src={TrofeuBronze} alt="" />
                   <div style={{ textTransform: 'uppercase', color: '#6FBF8B' }}>
-                    TERCEIRO LUGAR
+                    <b className={classes.title}>TERCEIRO LUGAR</b>
                   </div>
                   <div style={{ textTransform: 'uppercase', color: '#FFF' }}>
                     9º ANO A
@@ -265,7 +291,7 @@ function Ranking() {
                       paddingBottom: 20,
                     }}
                   >
-                    4º lugar
+                    <b>4º lugar</b>
                   </div>
                   <div style={{ textTransform: 'uppercase', color: '#FFF' }}>
                     4º ANO A
